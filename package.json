@@ -1,0 +1,21 @@
+{
+	"name": "test-new-db-schema",
+	"version": "1.0.0",
+	"description": "",
+	"main": "app.js",
+	"type": "module",
+	"scripts": {
+		"dev": "nodemon .",
+		"start": "node ."
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^4.17.1",
+		"mongoose": "^6.0.13"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.15"
+	}
+}
