@@ -1,15 +1,18 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import deviceRoutes from './device/routes.config.device.js';
+import experimentRoutes from './experiment/routes.experiment.config.js';
 
 const app = express();
 
-app.use('/device', deviceRoutes);
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use('/experiment', experimentRoutes);
 
 const start = async () => {
     try {
         await mongoose.connect(
-            'you mongodb address'
+            'mongodb+srv://manulovicm:GvJgLFRGqy4myCi@cluster0.joysr.mongodb.net/new-db-schema?retryWrites=true&w=majority'
         );
         app.listen(
             3000,
