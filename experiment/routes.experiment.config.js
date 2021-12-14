@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import checkingRequestsForFields from './middlewares/checkingRequestsForFields.js';
 import {
     getExperimentById,
     createNewExperiment,
@@ -10,11 +11,50 @@ import {
 
 const router = Router();
 
-router.get('/', getExperimentById);
-router.post('/new', createNewExperiment);
-router.patch('/measurement', pushMeasurementExperiment);
-router.patch('/title', edditTitleExperiment);
-router.patch('/description', edditDescriptionExperiment);
 
+// Получить эксперимент по индифиатору
+router.get(
+    '/',
+    [
+        checkingRequestsForFields('query', 'id')
+    ],
+    getExperimentById
+);
+
+// Создать новый экспреимент
+router.post(
+    '/new',
+    [
+        checkingRequestsForFields('body', 'title', 'description')
+    ],
+    createNewExperiment
+);
+
+// Добавить измерения в текущий экспримент
+router.patch(
+    '/measurement',
+    [
+        checkingRequestsForFields('body', 'id', 'measurement')
+    ],
+    pushMeasurementExperiment
+);
+
+// Изменить название эксперимента
+router.patch(
+    '/title',
+    [
+        checkingRequestsForFields('body', 'id', 'title')
+    ],
+    edditTitleExperiment
+);
+
+// Изменить описание эксперимента
+router.patch(
+    '/description',
+    [
+        checkingRequestsForFields('body', 'id', 'description')
+    ],
+    edditDescriptionExperiment
+);
 
 export default router;

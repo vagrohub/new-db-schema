@@ -1,13 +1,14 @@
 import { Experiment } from '../model/experiment.model.js';
 import { experimentWithSpecifiedIdNotExist } from '../utils/controllers.utils.js';
 
-export const getExperimentById = async (req, res) => {
+const getExperimentById = async (req, res) => {
     try {
         const experiment = await Experiment.findById(req.query.id);
         
         if (!experiment) {
             return experimentWithSpecifiedIdNotExist(req, res);
         }
+        console.log(3);
 
         return res.status(200).send({ experiment });
     } catch (error) {
@@ -15,7 +16,7 @@ export const getExperimentById = async (req, res) => {
     }
 };
 
-export const createNewExperiment = async (req, res) => {
+const createNewExperiment = async (req, res) => {
     try {
         const experiment = new Experiment({
             title: req.body.title, description: req.body.description
@@ -27,7 +28,7 @@ export const createNewExperiment = async (req, res) => {
     }
 };
 
-export const edditTitleExperiment = async (req, res) => {
+const edditTitleExperiment = async (req, res) => {
     try {
         const experiment = await Experiment.findById(req.body.id);
         
@@ -42,7 +43,7 @@ export const edditTitleExperiment = async (req, res) => {
     }
 };
 
-export const edditDescriptionExperiment = async (req, res) => {
+const edditDescriptionExperiment = async (req, res) => {
     try {
         const experiment = await Experiment.findById(req.body.id);
         
@@ -57,7 +58,7 @@ export const edditDescriptionExperiment = async (req, res) => {
     }
 };
 
-export const pushMeasurementExperiment = async (req, res) => {
+const pushMeasurementExperiment = async (req, res) => {
     try {
         const experiment = await Experiment.findById(req.body.id);
         
@@ -71,3 +72,11 @@ export const pushMeasurementExperiment = async (req, res) => {
         return res.status(503).send({ error });
     }
 };
+
+export {
+    getExperimentById,
+    createNewExperiment,
+    edditTitleExperiment,
+    edditDescriptionExperiment,
+    pushMeasurementExperiment,
+}

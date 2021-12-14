@@ -1,5 +1,10 @@
-export const experimentWithSpecifiedIdNotExist = (req, res) => {
+// Выброс ошибки, когда не удалось найти эксперимент по id
+const experimentWithSpecifiedIdNotExist = (req, res) => {
     return res.status(404).send({
-        error: new Error(`${req.body.id} not found`)
+        error: `${req.body.id} not found`
     });
+};
+
+export {
+    experimentWithSpecifiedIdNotExist
 };
