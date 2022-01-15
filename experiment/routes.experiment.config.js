@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import checkingRequestsForFields from './middlewares/checkingRequestsForFields.js';
+import checkingRequestsForFields from '../middlewares/checkingRequestsForFields.middleware.js';
 import {
     getExperimentById,
     createNewExperiment,

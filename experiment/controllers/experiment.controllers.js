@@ -1,4 +1,4 @@
-import { Experiment } from '../model/experiment.model.js';
+import Experiment from '../model/experiment.model.js';
 import { experimentWithSpecifiedIdNotExist } from '../utils/controllers.utils.js';
 
 const getExperimentById = async (req, res) => {
@@ -8,11 +8,10 @@ const getExperimentById = async (req, res) => {
         if (!experiment) {
             return experimentWithSpecifiedIdNotExist(req, res);
         }
-        console.log(3);
 
         return res.status(200).send({ experiment });
     } catch (error) {
-        return res.status(503).send({ error });
+        return res.status(503).send({ error: error.message });
     }
 };
 
@@ -24,7 +23,7 @@ const createNewExperiment = async (req, res) => {
         await experiment.save();
         return res.status(200).send({ id: experiment._id });
     } catch (error) {
-        return res.status(503).send({ error })
+        return res.status(503).send({ error: error.message })
     }
 };
 
@@ -39,7 +38,7 @@ const edditTitleExperiment = async (req, res) => {
         await experiment.edditTitle(req.body.title);
         return res.status(200).send({ experiment });
     } catch (error) {
-        return res.status(503).send({ error });
+        return res.status(503).send({ error: error.message });
     }
 };
 
@@ -54,7 +53,7 @@ const edditDescriptionExperiment = async (req, res) => {
         await experiment.edditDescription(req.body.description);
         return res.status(200).send({ experiment });
     } catch (error) {
-        return res.status(503).send({ error });
+        return res.status(503).send({ error: error.message });
     }
 };
 
@@ -69,7 +68,7 @@ const pushMeasurementExperiment = async (req, res) => {
         await experiment.pushMeasurement(req.body.measurement);
         return res.status(200).send({ experiment });
     } catch (error) {
-        return res.status(503).send({ error });
+        return res.status(503).send({ error: error.message });
     }
 };
 

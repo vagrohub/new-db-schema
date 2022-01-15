@@ -44,4 +44,4 @@ experimentSchema.methods.edditDescription = async function(description) {
 
 const Experiment = model('Experiment', experimentSchema);
 
-export { Experiment };
+export default Experiment;
